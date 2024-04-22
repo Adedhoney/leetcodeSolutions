@@ -184,13 +184,37 @@ public class Solution
         }
         return nums;
     }
-    // public bool IncreasingTriplet(int[] nums)
-    // {
-    //     for (int i = 0; i < nums.Length; i++)
-    //     {
+    public bool IncreasingTriplet(int[] nums)
+    {
+        int[] lowPair = [0, 0];
+        int leastNum = nums[0];
+        int secondLowest;
+        bool setLowPair = false;
 
-    //     }
-    //     return false;
-    // }
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (i == 0) { continue; }
+            if (setLowPair && nums[i] > lowPair[1]) { return true; }
+            if (nums[i] > leastNum)
+            {
+                secondLowest = nums[i];
+                if (setLowPair && secondLowest < lowPair[1])
+                {
+                    lowPair = [leastNum, secondLowest];
+                    setLowPair = true;
+                }
+                if (!setLowPair)
+                {
+                    lowPair = [leastNum, secondLowest];
+                    setLowPair = true;
+                }
+            }
+            if (nums[i] < leastNum)
+            {
+                leastNum = nums[i];
+            }
+        }
+        return false;
+    }
 }
 
