@@ -154,3 +154,39 @@ function reverseVowels(s: string): string {
     }
     return stringlist.join("")
 }
+
+function reverseWords(s: string): string {
+    const wordList = s.split(" ")
+    let newWord = ""
+    for (let i = wordList.length - 1; i >= 0; i--) {
+        if (!wordList[i]) {
+            newWord += wordList[i] + " "
+        }
+    }
+    return newWord.trim()
+}
+
+function productExceptSelf(nums: number[]): number[] {
+    const array: number[][] = Array(nums.length)
+        .fill(null)
+        .map(() => [1, 1])
+    let prefixNum = 1
+    let suffixNum = 1
+    for (let i = 0; i < nums.length; i++) {
+        let j = nums.length - 1 - i
+        if (i == 0) {
+            continue
+        }
+
+        prefixNum *= nums[i - 1]
+        array[i][0] = prefixNum
+
+        suffixNum *= nums[j + 1]
+        array[j][1] = suffixNum
+    }
+
+    for (let i = 0; i < nums.length; i++) {
+        nums[i] = array[i][0] * array[i][1]
+    }
+    return nums
+}

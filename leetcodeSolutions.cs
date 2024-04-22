@@ -147,5 +147,50 @@ public class Solution
         return string.Join(string.Empty, stringlist);
 
     }
+    public string ReverseWords(string s)
+    {
+        string[] wordList = s.Split(" ");
+        string newWord = "";
+        for (int i = wordList.Length - 1; i >= 0; i--)
+        {
+            if (wordList[i] != string.Empty)
+            {
+                newWord += wordList[i] + " ";
+            }
+        }
+        return newWord.Trim();
+
+    }
+    public int[] ProductExceptSelf(int[] nums)
+    {
+        int[] prefix = Enumerable.Repeat(1, nums.Length).ToArray();
+        int[] suffix = Enumerable.Repeat(1, nums.Length).ToArray();
+        int prefixNum = 1;
+        int suffixNum = 1;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            int j = nums.Length - 1 - i;
+            if (i == 0) { continue; }
+
+            prefixNum *= nums[i - 1];
+            prefix[i] = prefixNum;
+
+            suffixNum *= nums[j + 1];
+            suffix[j] = suffixNum;
+        }
+        for (int i = 0; i < nums.Length; i++)
+        {
+            nums[i] = prefix[i] * suffix[i];
+        }
+        return nums;
+    }
+    // public bool IncreasingTriplet(int[] nums)
+    // {
+    //     for (int i = 0; i < nums.Length; i++)
+    //     {
+
+    //     }
+    //     return false;
+    // }
 }
 
