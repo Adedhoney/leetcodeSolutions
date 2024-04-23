@@ -248,5 +248,19 @@ public class Solution
         chars = s.ToArray();
         return chars.Length;
     }
+    public void MoveZeroes(int[] nums)
+    {
+        int lastSwapPos = -1;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (nums[i] == 0) { continue; }
+            if (lastSwapPos + 1 == i) { lastSwapPos++; continue; }
+            // swap
+            nums[lastSwapPos + 1] = nums[i];
+            nums[i] = 0;
+            lastSwapPos++;
+
+        }
+    }
 }
 

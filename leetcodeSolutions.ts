@@ -252,3 +252,19 @@ function compress(chars: string[]): number {
     chars = newList
     return chars.length
 }
+
+function moveZeroes(nums: number[]): void {
+    let lastSwapPos = -1
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === 0) {
+            continue
+        }
+        if (lastSwapPos + 1 === i) {
+            lastSwapPos++
+            continue
+        }
+        nums[lastSwapPos + 1] = nums[i]
+        nums[i] = 0
+        lastSwapPos++
+    }
+}
