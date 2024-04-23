@@ -216,5 +216,37 @@ public class Solution
         }
         return false;
     }
+    public int Compress(char[] chars)
+    {
+        string s = "";
+        int charLength = 1;
+        for (int i = 0; i < chars.Length; i++)
+        {
+            if (i == 0)
+            {
+                s += chars[i];
+                continue;
+            }
+
+            if (i == chars.Length - 1 && chars[i] == chars[i - 1])
+            {
+                s += charLength + 1;
+            }
+            if (chars[i] == chars[i - 1])
+            {
+                charLength++; continue;
+            }
+            if (charLength > 1)
+            {
+                s += charLength;
+            }
+            s += chars[i];
+            charLength = 1;
+
+        }
+        s.CopyTo(0, chars, 0, s.Length);
+        chars = s.ToArray();
+        return chars.Length;
+    }
 }
 

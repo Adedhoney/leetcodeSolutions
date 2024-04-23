@@ -221,3 +221,34 @@ function increasingTriplet(nums: number[]): boolean {
     }
     return false
 }
+function compress(chars: string[]): number {
+    let s = ""
+    let charLength = 1
+    for (let i = 0; i < chars.length; i++) {
+        if (i == 0) {
+            s += chars[i]
+            continue
+        }
+
+        if (
+            i == chars.length - 1 &&
+            chars[i] == chars[i - 1]
+        ) {
+            s += charLength + 1
+        }
+        if (chars[i] == chars[i - 1]) {
+            charLength++
+            continue
+        }
+        if (charLength > 1) {
+            s += charLength
+        }
+        s += chars[i]
+        charLength = 1
+    }
+
+    const newList = [...s.split("")]
+    chars.splice(0, s.length, ...newList)
+    chars = newList
+    return chars.length
+}
