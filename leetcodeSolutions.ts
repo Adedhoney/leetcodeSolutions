@@ -268,3 +268,18 @@ function moveZeroes(nums: number[]): void {
         lastSwapPos++
     }
 }
+function isSubsequence(s: string, t: string): boolean {
+    let sIndex = 0
+    if (s == "") {
+        return true
+    }
+    for (let i = 0; i < t.length; i++) {
+        if (t[i] == s[sIndex] && sIndex >= s.length - 1) {
+            return true
+        }
+        if (t[i] == s[sIndex]) {
+            sIndex++
+        }
+    }
+    return false
+}

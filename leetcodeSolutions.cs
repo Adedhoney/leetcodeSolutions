@@ -262,5 +262,18 @@ public class Solution
 
         }
     }
+
+    public bool IsSubsequence(string s, string t)
+    {
+        int sIndex = 0;
+        if (s == "") { return true; }
+        for (int i = 0; i < t.Length; i++)
+        {
+            if (t[i] == s[sIndex] && sIndex >= s.Length - 1) { return true; }
+            if (t[i] == s[sIndex]) { sIndex++; }
+        }
+        return false;
+
+    }
 }
 
