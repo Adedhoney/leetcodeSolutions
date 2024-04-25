@@ -301,3 +301,22 @@ function maxArea(height: number[]): number {
     }
     return maxArea
 }
+
+function maxOperations(nums: number[], k: number): number {
+    let numOfOperations = 0
+    let secondPairs = {}
+
+    for (let i = 0; i < nums.length; i++) {
+        let isPair = secondPairs[nums[i]]
+        if (isPair) {
+            secondPairs[nums[i]] = isPair - 1
+            numOfOperations++
+        } else if (secondPairs[k - nums[i]]) {
+            secondPairs[k - nums[i]] =
+                secondPairs[k - nums[i]] + 1
+        } else {
+            secondPairs[k - nums[i]] = 1
+        }
+    }
+    return numOfOperations
+}

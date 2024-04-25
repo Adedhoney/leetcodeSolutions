@@ -298,5 +298,21 @@ public class Solution
         return maxArea;
 
     }
+    public int MaxOperations(int[] nums, int k)
+    {
+        int numOfOperations = 0;
+        var secondPairs = new Dictionary<int, int>();
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            int value;
+            bool numInDic = secondPairs.TryGetValue(nums[i], out value);
+            if (numInDic && value > 0) { secondPairs[nums[i]] = value - 1; numOfOperations++; }
+            else if (secondPairs.TryGetValue(k - nums[i], out value)) { secondPairs[k - nums[i]] = value + 1; }
+            else { secondPairs[k - nums[i]] = 1; }
+
+        }
+        return numOfOperations;
+    }
 }
 
