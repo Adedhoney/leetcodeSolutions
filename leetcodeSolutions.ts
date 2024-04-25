@@ -303,20 +303,34 @@ function maxArea(height: number[]): number {
 }
 
 function maxOperations(nums: number[], k: number): number {
-    let numOfOperations = 0
-    let secondPairs = {}
+    let ops = 0
+    let set = {}
 
-    for (let i = 0; i < nums.length; i++) {
-        let isPair = secondPairs[nums[i]]
-        if (isPair) {
-            secondPairs[nums[i]] = isPair - 1
-            numOfOperations++
-        } else if (secondPairs[k - nums[i]]) {
-            secondPairs[k - nums[i]] =
-                secondPairs[k - nums[i]] + 1
+    for (let num of nums) {
+        const pair = k - num
+        if (set[num] >= 1) {
+            set[num]--
+            ops++
         } else {
-            secondPairs[k - nums[i]] = 1
+            set[pair] ? set[pair]++ : (set[pair] = 1)
         }
     }
-    return numOfOperations
+    return ops
+}
+
+function findMaxAverage(nums: number[], k: number): number {
+    let maxSum = 0
+    let sum = 0
+    for (let i = 0; i < k; i++) {
+        sum += nums[i]
+    }
+    maxSum = sum
+    for (let i = k; i < nums.length; i++) {
+        sum -= nums[i - k]
+        sum += nums[i]
+        if (sum > maxSum) {
+            maxSum = sum
+        }
+    }
+    return maxSum / k
 }
