@@ -275,5 +275,28 @@ public class Solution
         return false;
 
     }
+
+    public int MaxArea(int[] height)
+    {
+        int maxArea = 0;
+        for (int i = 0, j = height.Length - 1; i >= j;)
+        {
+            int area = (j - i) * ((height[i] < height[j]) ? height[i] : height[j]);
+            if (area > maxArea) { maxArea = area; }
+            if (height[i] <= height[j])
+            {
+                i++;
+            }
+            else
+            {
+                j--;
+            }
+
+            Console.WriteLine(area);
+
+        }
+        return maxArea;
+
+    }
 }
 

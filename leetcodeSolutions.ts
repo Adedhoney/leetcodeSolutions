@@ -283,3 +283,21 @@ function isSubsequence(s: string, t: string): boolean {
     }
     return false
 }
+
+function maxArea(height: number[]): number {
+    let maxArea = 0
+    for (let i = 0, j = height.length - 1; i <= j; ) {
+        let area =
+            (j - i) *
+            (height[i] < height[j] ? height[i] : height[j])
+        if (area > maxArea) {
+            maxArea = area
+        }
+        if (height[i] <= height[j]) {
+            i++
+        } else {
+            j--
+        }
+    }
+    return maxArea
+}
