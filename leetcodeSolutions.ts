@@ -334,3 +334,57 @@ function findMaxAverage(nums: number[], k: number): number {
     }
     return maxSum / k
 }
+
+function maxVowels(s: string, k: number): number {
+    const vowels = ["a", "e", "i", "o", "u"]
+    let num = 0
+    for (let i = 0; i < k; i++) {
+        if (vowels.includes(s[i])) {
+            num++
+        }
+    }
+    let maxVowel = num
+    for (let i = k; i < s.length; i++) {
+        if (num == k) {
+            return num
+        }
+        let vIn = vowels.includes(s[i])
+        let vOut = vowels.includes(s[i - k])
+        if (vIn && !vOut) {
+            num++
+        }
+        if (!vIn && vOut) {
+            num--
+        }
+        if (num > maxVowel) {
+            maxVowel = num
+        }
+    }
+    return maxVowel
+}
+
+function longestOnes(nums: number[], k: number): number {
+    if (nums === null) {
+        throw new Error("Input array is null")
+    }
+
+    let start = 0,
+        end = 0,
+        zeros = 0
+
+    while (end < nums.length) {
+        if (nums[end] === 0) {
+            zeros++
+        }
+        end++
+
+        if (zeros > k) {
+            if (nums[start] === 0) {
+                zeros--
+            }
+            start++
+        }
+    }
+
+    return end - start
+}

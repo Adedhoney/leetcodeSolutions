@@ -334,5 +334,48 @@ public class Solution
         return maxSum / (double)k;
     }
 
+
+    public int MaxVowels(string s, int k)
+    {
+        char[] vowels = ['a', 'e', 'i', 'o', 'u'];
+        int num = 0;
+        for (int i = 0; i < k; i++)
+        {
+            if (vowels.Contains(s[i])) { num++; }
+        }
+        int maxVowel = num;
+        for (int i = k; i < s.Length; i++)
+        {
+            if (num == k) { return num; }
+            bool vIn = vowels.Contains(s[i]);
+            bool vOut = vowels.Contains(s[i - k]);
+            if (vIn && !vOut) { num++; }
+            if (!vIn && vOut) { num--; }
+            if (num > maxVowel) { maxVowel = num; }
+        }
+        return maxVowel;
+    }
+
+
+    public int LongestOnes(int[] nums, int k)
+    {
+        int zereos = 0;
+        int i = 0;
+        int j = 0;
+        while (j < nums.Length)
+        {
+            if (nums[j] == 0) { zereos++; }
+            j++;
+
+            if (zereos > k)
+            {
+                if (nums[i] == 0) { zereos--; }
+                i++;
+            }
+        }
+        return j - i;
+
+
+    }
 }
 
