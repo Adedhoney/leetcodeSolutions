@@ -421,5 +421,28 @@ public class Solution
         }
         return highest;
     }
+
+    public int PivotIndex(int[] nums)
+    {
+        int[] prefixArr = new int[nums.Length];
+        int[] suffixArr = new int[nums.Length];
+        int prefix = 0;
+        int suffix = 0;
+        for (int i = 0, j = nums.Length - 1; i < nums.Length && j >= 0; i++, j--)
+        {
+            prefixArr[i] = prefix;
+            suffixArr[j] = suffix;
+            prefix += nums[i];
+            suffix += nums[j];
+
+
+        }
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (prefixArr[i] == suffixArr[i]) { return i; }
+
+        }
+        return -1;
+    }
 }
 

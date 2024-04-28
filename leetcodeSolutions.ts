@@ -429,3 +429,26 @@ function largestAltitude(gain: number[]): number {
     }
     return highest
 }
+
+function pivotIndex(nums: number[]): number {
+    let prefixArr = new Array(nums.length)
+    let suffixArr = new Array(nums.length)
+    let prefix = 0
+    let suffix = 0
+    for (
+        let i = 0, j = nums.length - 1;
+        i < nums.length && j >= 0;
+        i++, j--
+    ) {
+        prefixArr[i] = prefix
+        suffixArr[j] = suffix
+        prefix += nums[i]
+        suffix += nums[j]
+    }
+    for (let i = 0; i < nums.length; i++) {
+        if (prefixArr[i] == suffixArr[i]) {
+            return i
+        }
+    }
+    return -1
+}
