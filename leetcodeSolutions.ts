@@ -417,3 +417,15 @@ function longestSubarray(nums: number[]): number {
     }
     return longest
 }
+
+function largestAltitude(gain: number[]): number {
+    let highest = 0
+    let current = 0
+    for (let g of gain) {
+        current += g
+        if (current > highest) {
+            highest = current
+        }
+    }
+    return highest
+}

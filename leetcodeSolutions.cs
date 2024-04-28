@@ -406,5 +406,20 @@ public class Solution
         if (!encounteredZero) { return longest - 1; }
         return longest;
     }
+
+    public int LargestAltitude(int[] gain)
+    {
+        int highest = 0;
+        int current = 0;
+        foreach (int g in gain)
+        {
+            current += g;
+            if (current > highest)
+            {
+                highest = current;
+            }
+        }
+        return highest;
+    }
 }
 
