@@ -388,3 +388,32 @@ function longestOnes(nums: number[], k: number): number {
 
     return end - start
 }
+
+function longestSubarray(nums: number[]): number {
+    let longest = 0
+    let lastCount = 0
+    let count = 0
+    let encounteredZero = false
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] == 0) {
+            encounteredZero = true
+            if (count + lastCount > longest) {
+                longest = count + lastCount
+            }
+            lastCount = count
+            count = 0
+        } else {
+            count++
+        }
+
+        if (i == nums.length - 1) {
+            if (count + lastCount > longest) {
+                longest = count + lastCount
+            }
+        }
+    }
+    if (!encounteredZero) {
+        return longest - 1
+    }
+    return longest
+}

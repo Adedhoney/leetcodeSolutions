@@ -377,5 +377,34 @@ public class Solution
 
 
     }
+
+    public int LongestSubarray(int[] nums)
+    {
+        int longest = 0;
+        int lastCount = 0;
+        int count = 0;
+        bool encounteredZero = false;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (nums[i] == 0)
+            {
+                encounteredZero = true;
+                if (count + lastCount > longest) { longest = count + lastCount; }
+                lastCount = count;
+                count = 0;
+            }
+            else
+            {
+                count++;
+            }
+
+            if (i == nums.Length - 1)
+            {
+                if (count + lastCount > longest) { longest = count + lastCount; }
+            }
+        }
+        if (!encounteredZero) { return longest - 1; }
+        return longest;
+    }
 }
 
