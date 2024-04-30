@@ -114,7 +114,9 @@ public class Solution
     public string ReverseVowels(string s)
     {
         char[] vowels = [
-            'a','e', 'i',
+        'a',
+        'e',
+        'i',
         'o',
         'u',
         'A',
@@ -443,6 +445,24 @@ public class Solution
 
         }
         return -1;
+    }
+
+    public IList<IList<int>> FindDifference(int[] nums1, int[] nums2)
+    {
+        var num1Set = nums1.ToHashSet<int>();
+        var num2Set = nums2.ToHashSet<int>();
+        foreach (int num in num2Set)
+        {
+            if (num1Set.Contains(num))
+            {
+                num1Set.Remove(num);
+                num2Set.Remove(num);
+            }
+        }
+
+        var num1Distinct = num1Set.ToArray<int>();
+        var num2Distinct = num2Set.ToArray<int>();
+        return [num1Distinct, num2Distinct];
     }
 }
 

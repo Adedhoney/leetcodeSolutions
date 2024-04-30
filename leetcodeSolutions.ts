@@ -452,3 +452,20 @@ function pivotIndex(nums: number[]): number {
     }
     return -1
 }
+
+function findDifference(
+    nums1: number[],
+    nums2: number[]
+): number[][] {
+    const num1Set = new Set(nums1)
+    const num2Set = new Set(nums2)
+    for (let num of num2Set) {
+        if (num in num1Set) {
+            num1Set.delete(num)
+            num2Set.delete(num)
+        }
+    }
+    const num1 = Array.from(num1Set)
+    const num2 = Array.from(num2Set)
+    return [num1, num2]
+}
