@@ -469,3 +469,83 @@ function findDifference(
     const num2 = Array.from(num2Set)
     return [num1, num2]
 }
+
+function uniqueOccurrences(arr: number[]): boolean {
+    let numObj = {}
+    let occObj = {}
+    for (let num of arr) {
+        if (numObj[num]) {
+            numObj[num]++
+        } else {
+            numObj[num] = 1
+        }
+    }
+    for (let num in numObj) {
+        if (occObj[numObj[num]]) {
+            return false
+        } else occObj[numObj[num]] = 1
+    }
+    return true
+}
+
+function removeStars(s: string): string {
+    const answer: string[] = []
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === "*") {
+            answer.pop()
+            continue
+        }
+        answer.push(s[i])
+    }
+    return answer.join("")
+}
+
+function decodeString(s: string): string {
+    const currentNumber: number[] = []
+    let answer = ""
+
+    function getString(i: number, number: string): any {
+        currentNumber.push(Number(number))
+        let strings = ""
+        let newNumber = ""
+        let string
+        for (let j = i + 1; j < s.length; j++) {
+            if (s[j] === "[") {
+                ;[j, string] = getString(j, newNumber)
+                newNumber = ""
+                strings += string
+                continue
+            }
+            if (s[j] === "]") {
+                strings = strings.repeat(
+                    currentNumber.pop() as number
+                )
+                return [j, strings]
+            }
+            if (Number(s[j]) || Number(s[j]) === 0) {
+                newNumber += s[j]
+            } else {
+                strings += s[j]
+            }
+        }
+    }
+
+    let number = ""
+    for (let i = 0; i < s.length; i++) {
+        let strings = ""
+        if (s[i] === "[") {
+            ;[i, strings] = getString(i, number)
+            number = ""
+            answer += strings
+            continue
+        }
+        if (Number(s[i]) || Number(s[i]) === 0) {
+            number += s[i]
+        } else {
+            answer += s[i]
+        }
+    }
+    return answer
+}
+
+// function

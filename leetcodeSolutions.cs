@@ -464,5 +464,95 @@ public class Solution
         var num2Distinct = num2Set.ToArray<int>();
         return [num1Distinct, num2Distinct];
     }
+    public bool UniqueOccurrences(int[] arr)
+    {
+        var numObj = new Dictionary<int, int>();
+        var occObj = new Dictionary<int, int>();
+        foreach (int num in arr)
+        {
+            if (numObj.TryGetValue(num, out int value))
+            {
+                numObj[num]++;
+            }
+            else { numObj[num] = 1; }
+        }
+        foreach (var pair in numObj)
+        {
+            if (occObj.TryGetValue(pair.Value, out int value))
+            {
+                return false;
+            }
+            else { occObj[pair.Value] = 1; }
+        }
+        return true;
+    }
+
+    public bool CloseStrings(string word1, string word2)
+    {
+        if (word1.Length != word2.Length) { return false; }
+        for (int i = 0; i < word1.Length; i++)
+        {
+            if (!word1.Contains(word2[i]))
+            {
+                return false;
+            }
+        }
+
+        var word1Obj = new Dictionary<char, int>();
+        var word2Obj = new Dictionary<char, int>();
+        for (int i = 0; i < word1.Length; i++)
+        {
+            if (word1Obj.TryGetValue(word1[i], out int occ1))
+            {
+                word1Obj[word1[i]]++;
+            }
+            else { word1Obj[word1[i]] = 1; }
+            if (word2Obj.TryGetValue(word2[i], out int occ2))
+            {
+                word2Obj[word2[i]]++;
+            }
+            else { word2Obj[word2[i]] = 1; }
+        }
+
+        var word1Array = word1Obj.ToList();
+        var word2Array = word2Obj.ToList();
+
+        if (word1Array.Count != word2Array.Count)
+        {
+            return false;
+        }
+
+        List<int> word1List = [];
+        List<int> word2List = [];
+        for (int i = 0; i < word1Array.Count; i++)
+        {
+            word1List.Add(word1Array[i].Value);
+            word2List.Add(word2Array[i].Value);
+        }
+        word1List.Sort();
+        word2List.Sort();
+        for (int i = 0; i < word1List.Count; i++)
+        {
+            if (word1List[1] != word2List[1]) { return false; }
+        }
+
+        return true;
+    }
+
+    public string RemoveStars(string s)
+    {
+
+        List<char> answer = [];
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (s[i] == '*')
+            {
+                answer.RemoveAt(answer.Count - 1);
+                continue;
+            }
+            answer.Add(s[i]);
+        }
+        return string.Join(string.Empty, answer);
+    }
 }
 
