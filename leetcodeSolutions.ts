@@ -548,4 +548,31 @@ function decodeString(s: string): string {
     return answer
 }
 
-// function
+function equalPairs(grid: number[][]): number {
+    let num = 0
+    let rows: any = {}
+    let columns: string[] = []
+
+    for (let i = 0; i < grid.length; i++) {
+        let row = ""
+        let column = ""
+        for (let j = 0; j < grid.length; j++) {
+            row += `-${grid[i][j]}`
+            column += `-${grid[j][i]}`
+        }
+        if (rows[row]) {
+            rows[row] += 1
+        } else {
+            rows[row] = 1
+        }
+
+        columns.push(column)
+    }
+
+    for (let i = 0; i < columns.length; i++) {
+        if (rows[columns[i]]) {
+            num += rows[columns[i]]
+        }
+    }
+    return num
+}

@@ -554,5 +554,42 @@ public class Solution
         }
         return string.Join(string.Empty, answer);
     }
+
+    public int EqualPairs(int[][] grid)
+    {
+        int number = 0;
+        var rows = new Dictionary<string, int>();
+        var columns = new List<string>();
+
+        for (int i = 0; i < grid.Length; i++)
+        {
+            string row = "";
+            string column = "";
+            for (int j = 0; j < grid.Length; j++)
+            {
+                row += $"-{grid[i][j]}";
+                column += $"-{grid[j][i]}";
+            }
+            if (rows.ContainsKey(row))
+            {
+                rows[row] += 1;
+            }
+            else { rows[row] = 1; }
+
+            columns.Add(column);
+
+        }
+
+        for (int i = 0; i < columns.Count; i++)
+        {
+            if (rows.ContainsKey(columns[i]))
+            {
+                number += rows[columns[i]];
+            }
+        }
+        return number;
+
+
+    }
 }
 
