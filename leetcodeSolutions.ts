@@ -576,3 +576,39 @@ function equalPairs(grid: number[][]): number {
     }
     return num
 }
+
+function asteroidCollision(asteroids: number[]): number[] {
+    let output: number[] = []
+    for (let i = 0; i < asteroids.length; i++) {
+        if (asteroids[i] > 0) {
+            output.push(asteroids[i])
+            continue
+        } else if (output.length === 0) {
+            output.push(asteroids[i])
+            continue
+        } else {
+            let still_crushing = true
+            do {
+                if (
+                    output.length == 0 ||
+                    output[output.length - 1] < 0
+                ) {
+                    output.push(asteroids[i])
+                    still_crushing = false
+                    continue
+                }
+                let collision =
+                    output[output.length - 1] + asteroids[i]
+                if (collision > 0) {
+                    still_crushing = false
+                } else if (collision == 0) {
+                    output.pop()
+                    still_crushing = false
+                } else {
+                    output.pop()
+                }
+            } while (still_crushing)
+        }
+    }
+    return output
+}

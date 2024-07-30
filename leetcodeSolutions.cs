@@ -588,8 +588,52 @@ public class Solution
             }
         }
         return number;
+    }
 
-
+    public int[] AsteroidCollision(int[] asteroids)
+    {
+        var output = new List<int>();
+        for (int i = 0; i < asteroids.Length; i++)
+        {
+            if (asteroids[i] > 0)
+            {
+                output.Add(asteroids[i]);
+                continue;
+            }
+            else if (output.Count == 0)
+            {
+                output.Add(asteroids[i]);
+                continue;
+            }
+            else
+            {
+                bool still_crushing = true;
+                do
+                {
+                    if (output.Count == 0 || output[^1] < 0)
+                    {
+                        output.Add(asteroids[i]);
+                        still_crushing = false;
+                        continue;
+                    }
+                    int collision = output[^1] + asteroids[i];
+                    if (collision > 0)
+                    {
+                        still_crushing = false;
+                    }
+                    else if (collision == 0)
+                    {
+                        output.RemoveAt(output.Count - 1);
+                        still_crushing = false;
+                    }
+                    else
+                    {
+                        output.RemoveAt(output.Count - 1);
+                    }
+                } while (still_crushing);
+            }
+        }
+        return output.ToArray();
     }
 }
 
