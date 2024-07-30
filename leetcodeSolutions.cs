@@ -637,3 +637,30 @@ public class Solution
     }
 }
 
+public class RecentCounter
+{
+
+    private List<int> pings;
+    public RecentCounter()
+    {
+        pings = [];
+    }
+
+    public int Ping(int t)
+    {
+        pings.Add(t);
+        int count = 0;
+        for (int i = pings.Count - 1; i >= 0; i--)
+        {
+            if (pings[i] >= t - 3000)
+            {
+                count++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return count;
+    }
+}

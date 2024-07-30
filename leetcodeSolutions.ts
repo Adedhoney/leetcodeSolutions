@@ -612,3 +612,29 @@ function asteroidCollision(asteroids: number[]): number[] {
     }
     return output
 }
+
+class RecentCounter {
+    private pings: number[]
+    constructor() {
+        this.pings = []
+    }
+
+    ping(t: number): number {
+        this.pings.push(t)
+        let count = 0
+        for (let i = this.pings.length - 1; i >= 0; i--) {
+            if (this.pings[i] >= t - 3000) {
+                count++
+            } else {
+                break
+            }
+        }
+        // const count = this.pings.filter((ping) => {
+        //     if (ping >= t - 3000) {
+        //         return true
+        //     }
+        //     return false
+        // })
+        return count
+    }
+}
