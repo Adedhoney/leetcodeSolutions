@@ -635,7 +635,51 @@ public class Solution
         }
         return output.ToArray();
     }
+
+
+    public string PredictPartyVictory(string senate)
+    {
+        var senateQueue = new List<char>();
+        do
+        {
+            var senateList = senate.ToArray().ToList();
+            int rLeft = 0;
+            int dLeft = 0;
+
+            int j = 0;
+            foreach (char senator in senate)
+            {
+                if (senateQueue.Count == 0)
+                {
+                    senateQueue.Add(senator);
+                    if (senator == 'R') { rLeft++; }
+                    else { dLeft++; }
+                    j++;
+                }
+                else if (senator == senateQueue[0])
+                {
+                    senateQueue.Add(senator);
+                    if (senator == 'R') { rLeft++; }
+                    else { dLeft++; }
+                    j++;
+                }
+                else
+                {
+                    senateQueue.RemoveAt(0);
+                    senateList.RemoveAt(j);
+                }
+            }
+            if (rLeft == 0) { return "Dire"; }
+            else if (dLeft == 0)
+            {
+                return "Radiant";
+            }
+            senate = string.Join(string.Empty, senateList);
+        } while (true);
+    }
 }
+
+
 
 public class RecentCounter
 {

@@ -638,3 +638,41 @@ class RecentCounter {
         return count
     }
 }
+
+function predictPartyVictory(senate: string): string {
+    let senateQueue: string[] = []
+    do {
+        let senateList = senate.split("")
+        let rLeft = 0
+        let dLeft = 0
+        let j = 0
+        for (let senator of senate) {
+            if (senateQueue.length == 0) {
+                senateQueue.push(senator)
+                if (senator == "R") {
+                    rLeft++
+                } else {
+                    dLeft++
+                }
+                j++
+            } else if (senator == senateQueue[0]) {
+                senateQueue.push(senator)
+                if (senator == "R") {
+                    rLeft++
+                } else {
+                    dLeft++
+                }
+                j++
+            } else {
+                senateQueue.shift()
+                senateList.splice(j, 1)
+            }
+        }
+        if (rLeft == 0) {
+            return "Dire"
+        } else if (dLeft == 0) {
+            return "Radiant"
+        }
+        senate = senateList.join("")
+    } while (true)
+}
